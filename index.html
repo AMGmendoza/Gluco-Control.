@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gluco-Control · Yogurt funcional de nopal</title>
+  <meta name="description" content="Gluco-Control es un yogurt funcional de nopal creado por estudiantes de Ingeniería Bioquímica del ITESCO. Sin azúcar añadida, con fibra soluble y cultivos vivos." />
+  <meta name="theme-color" content="#1B3325" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231B3325'/%3E%3Cpath d='M16 26V13M16 19c0-5 3-8 7-8 2 0 3 1.4 3 3 0 4-4 7-10 7' fill='none' stroke='%23CFE39A' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="i-nopal" viewBox="0 0 24 24">
+    <rect x="9.4" y="4.2" width="5.2" height="17.6" rx="2.6" fill="currentColor" stroke="none"/>
+    <rect x="4.2" y="10.6" width="4.4" height="8.2" rx="2.2" fill="currentColor" stroke="none"/>
+    <rect x="6" y="15.2" width="6" height="3.4" rx="1.7" fill="currentColor" stroke="none"/>
+    <rect x="15.4" y="8.2" width="4.4" height="9.4" rx="2.2" fill="currentColor" stroke="none"/>
+    <rect x="12" y="13.2" width="6" height="3.4" rx="1.7" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="2.9" r="1.2" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 11.1a1.8 1.8 0 0 0 1.8 1.4h7.6a1.8 1.8 0 0 0 1.8-1.4L20 7H6.2"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.3s-7.6-4.6-7.6-9.4A4.2 4.2 0 0 1 12 8.3a4.2 4.2 0 0 1 7.6 2.6c0 4.8-7.6 9.4-7.6 9.4Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.2s6 6.4 6 10.1a6 6 0 0 1-12 0C6 9.6 12 3.2 12 3.2Z"/></symbol>
+  <symbol id="i-gut" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><circle cx="16" cy="15" r="2.6"/><path d="M11.2 11.3l2.2 1.8M6 15.5c1.4 2.6 4 4.2 7 4.2"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10.5 11 5 20 5c0 9-5.5 14.5-15 14Z"/><path d="M5 19c3-5.6 6.6-8.6 11-10.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 2.8v5.6c0 4.3-2.9 7.7-7 9.1-4.1-1.4-7-4.8-7-9.1V5.8L12 3Z"/><path d="M8.8 12l2.2 2.2 4.2-4.4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-5.7 6.5-10.5A6.5 6.5 0 0 0 5.5 10.5C5.5 15.3 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.3 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.3-3.6-8.5S9.6 5.9 12 3.5Z"/></symbol>
+  <symbol id="i-school" viewBox="0 0 24 24"><path d="M3 9.5L12 4l9 5.5"/><path d="M5 11v8h14v-8"/><path d="M9.5 19v-5h5v5"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7" rx="1"/></symbol>
+</svg>
+
+<!-- ============ TOPBAR + HEADER ============ -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <p><span class="topbar-dot"></span> Proyecto académico · ITESCO · Feria de Alimentos 2026</p>
+    <p class="topbar-right">Sitio de demostración · Coatzacoalcos, Veracruz</p>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container nav">
+    <a href="#inicio" class="brand" aria-label="Gluco·Control, ir al inicio">
+      <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-nopal"/></svg></span>
+      <span class="brand-name">Gluco<span>·</span>Control</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+      <a href="#producto" data-nav="producto">Producto</a>
+      <a href="#ciencia" data-nav="ciencia">Ciencia</a>
+      <a href="#proceso" data-nav="proceso">Proceso</a>
+      <a href="#feria" data-nav="feria">Feria</a>
+      <a href="#equipo" data-nav="equipo">Equipo</a>
+      <a href="#preguntas" data-nav="preguntas">Preguntas</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="accountBtn" type="button" aria-label="Mi cuenta">
+        <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" id="cartBtn" type="button" aria-label="Abrir carrito de compras">
+        <svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+      <a href="#producto" class="btn btn--solid btn--sm nav-cta">Comprar</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobilePanel">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-panel" id="mobilePanel" hidden>
+    <nav aria-label="Navegación móvil">
+      <a href="#producto">Producto</a>
+      <a href="#ciencia">Ciencia</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#feria">Feria</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="mobile-actions">
+      <button class="btn btn--ghost btn--block" type="button" data-open="auth">Mi cuenta</button>
+      <a href="#producto" class="btn btn--solid btn--block">Ver la tienda</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="hero-pattern" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal><span class="dot"></span> ITESCO · Feria de Alimentos 2026</p>
+        <h1 data-reveal style="--d:.05s">El nopal hecho yogurt.<br /><em>Tu glucosa, en calma.</em></h1>
+        <p class="hero-lead" data-reveal style="--d:.1s">
+          Gluco-Control es un yogurt funcional con mucílago de nopal, fibra soluble y cultivos vivos.
+          Sin azúcar añadida, pensado para acompañar a personas con diabetes o prediabetes.
+        </p>
+        <div class="hero-actions" data-reveal style="--d:.15s">
+          <a href="#producto" class="btn btn--solid">Probar el prototipo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#ciencia" class="btn btn--ghost">Ver la ciencia</a>
+        </div>
+        <dl class="hero-specs" data-reveal style="--d:.2s">
+          <div><dt>0%</dt><dd>azúcar añadida</dd></div>
+          <div><dt>3</dt><dd>variantes</dd></div>
+          <div><dt>6–10 h</dt><dd>de fermentación</dd></div>
+          <div><dt>150 g</dt><dd>por envase</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-art" data-reveal style="--d:.1s">
+        <div class="art-halo" aria-hidden="true"></div>
+        <div class="art-ring" aria-hidden="true"></div>
+        <div class="art-jar" id="heroJar"></div>
+        <div class="art-chip art-chip--1"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg> Mucílago activo</div>
+        <div class="art-chip art-chip--2"><svg class="icon" aria-hidden="true"><use href="#i-drop"/></svg> 0% azúcar añadida</div>
+        <div class="art-chip art-chip--3"><svg class="icon" aria-hidden="true"><use href="#i-gut"/></svg> Probióticos vivos</div>
+        <p class="art-note">servido bien frío ✳</p>
+        <div class="art-sticker" aria-hidden="true">
+          <span>Feria</span>
+          <strong>2026</strong>
+          <span>ITESCO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container hero-foot">
+      <p>Ingeniería Bioquímica · Coatzacoalcos, Veracruz</p>
+      <p class="hero-foot-mid">Lote piloto 001</p>
+      <p class="hero-scroll">Desliza para conocer el proyecto <span aria-hidden="true">↓</span></p>
+    </div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-label="Características del producto">
+    <div class="ticker-track">
+      <div class="ticker-group">
+        <span>Mucílago de nopal</span><i aria-hidden="true">✳</i>
+        <span>Fermentación viva</span><i aria-hidden="true">✳</i>
+        <span>Sin azúcar añadida</span><i aria-hidden="true">✳</i>
+        <span>Probióticos activos</span><i aria-hidden="true">✳</i>
+        <span>Fibra soluble</span><i aria-hidden="true">✳</i>
+        <span>Hecho en Coatzacoalcos</span><i aria-hidden="true">✳</i>
+      </div>
+      <div class="ticker-group" aria-hidden="true">
+        <span>Mucílago de nopal</span><i>✳</i>
+        <span>Fermentación viva</span><i>✳</i>
+        <span>Sin azúcar añadida</span><i>✳</i>
+        <span>Probióticos activos</span><i>✳</i>
+        <span>Fibra soluble</span><i>✳</i>
+        <span>Hecho en Coatzacoalcos</span><i>✳</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CONTEXTO ============ -->
+  <section class="section problem" id="contexto">
+    <div class="container problem-grid">
+      <div class="problem-copy">
+        <p class="eyebrow" data-reveal><span class="dot"></span> 01 — El contexto</p>
+        <h2 class="h2" data-reveal>Más de 13 millones de personas en México viven con diabetes.</h2>
+        <p class="lead" data-reveal>
+          Y la oferta de lácteos funcionales —bajos en azúcar y con un beneficio metabólico real—
+          sigue siendo limitada. Quisimos cambiarlo desde la formulación.
+        </p>
+        <p data-reveal>
+          En Veracruz el nopal crece cerca de casa. Su mucílago, esa textura viscosa que aparece al
+          cortarlo, es una fibra soluble con una propiedad interesante: ralentiza la absorción de
+          carbohidratos. Ese hallazgo se convirtió en el corazón de nuestro proyecto.
+        </p>
+        <ul class="check-list" data-reveal>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Ingrediente local, disponible todo el año</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Aprovecha un recurso que hoy se desperdicia</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Perfil bajo en azúcar, sin endulzantes artificiales</li>
+        </ul>
+      </div>
+
+      <aside class="compare-card" data-reveal style="--d:.1s">
+        <div class="compare-head">
+          <p class="compare-kicker">Comparación cualitativa</p>
+          <h3>Yogurt convencional <span>vs.</span> Gluco-Control</h3>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Característica</span></th>
+              <th scope="col">Convencional</th>
+              <th scope="col" class="is-brand">Gluco-Control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Azúcar añadida</th>
+              <td>Sí, en la mayoría</td>
+              <td class="is-brand"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> 0%</td>
+            </tr>
+            <tr>
+              <th scope="row">Fibra extra</th>
+              <td>Mínima</td>
+              <td class="is-brand"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Mucílago de nopal</td>
+            </tr>
+            <tr>
+              <th scope="row">Probióticos</th>
+              <td>Variable</td>
+              <td class="is-brand"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Cultivo vivo</td>
+            </tr>
+            <tr>
+              <th scope="row">Enfoque</th>
+              <td>Sabor y textura</td>
+              <td class="is-brand"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Sabor + metabolismo</td>
+            </tr>
+            <tr>
+              <th scope="row">Origen</th>
+              <td>Importado</td>
+              <td class="is-brand"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Nopal de la región</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="micro">Comparación general con un yogurt saborizado comercial. No sustituye una evaluación nutrimental formal.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ CIENCIA ============ -->
+  <section class="section science" id="ciencia">
+    <div class="science-glow" aria-hidden="true"></div>
+    <div class="container">
+      <header class="section-head section-head--dark">
+        <div>
+          <p class="eyebrow eyebrow--light" data-reveal><span class="dot"></span> 02 — La ciencia</p>
+          <h2 class="h2 h2--light" data-reveal>Lo que hace el mucílago<br /><em>dentro de tu cuerpo.</em></h2>
+        </div>
+        <p class="head-aside head-aside--light" data-reveal>
+          No es magia: es química de hidrocoloides. El mucílago forma una red viscosa que
+          convive con lo que comes y cambia la velocidad con la que absorbes azúcares.
+        </p>
+      </header>
+
+      <div class="science-grid">
+        <div class="mech-list">
+          <article class="mech" data-reveal>
+            <span class="mech-num">01</span>
+            <div class="mech-icon"><svg class="icon" aria-hidden="true"><use href="#i-drop"/></svg></div>
+            <div>
+              <h3>Barrera mecánica</h3>
+              <p>Al hidratarse, el mucílago forma una matriz viscosa que ralentiza la hidrólisis de los carbohidratos en el tracto digestivo.</p>
+            </div>
+          </article>
+          <article class="mech" data-reveal style="--d:.08s">
+            <span class="mech-num">02</span>
+            <div class="mech-icon"><svg class="icon" aria-hidden="true"><use href="#i-gut"/></svg></div>
+            <div>
+              <h3>Modulación glucémica</h3>
+              <p>Esa red reduce la velocidad con la que la glucosa (C₆H₁₂O₆) pasa al torrente sanguíneo después de cada comida.</p>
+            </div>
+          </article>
+          <article class="mech" data-reveal style="--d:.16s">
+            <span class="mech-num">03</span>
+            <div class="mech-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></div>
+            <div>
+              <h3>Simbiótico natural</h3>
+              <p>La fibra del nopal alimenta a los cultivos lácticos vivos: prebiótico y probiótico conviviendo en el mismo envase.</p>
+            </div>
+          </article>
+        </div>
+
+        <figure class="chart-card" data-reveal style="--d:.1s">
+          <figcaption class="chart-head">
+            <div>
+              <p class="chart-kicker">Curva posprandial</p>
+              <h3>Glucosa en sangre a lo largo de 120 minutos</h3>
+            </div>
+            <span class="chart-pill">Esquema</span>
+          </figcaption>
+          <div class="chart-legend">
+            <span><i class="swatch swatch--clay"></i> Sin acompañamiento</span>
+            <span><i class="swatch swatch--lime"></i> Con Gluco-Control</span>
+          </div>
+          <svg class="chart" viewBox="0 0 560 300" role="img" aria-label="Gráfica esquemática que compara la curva de glucosa en sangre con y sin el acompañamiento de Gluco-Control">
+            <g class="chart-grid">
+              <line x1="64" y1="50" x2="530" y2="50"/>
+              <line x1="64" y1="110" x2="530" y2="110"/>
+              <line x1="64" y1="170" x2="530" y2="170"/>
+              <line x1="64" y1="230" x2="530" y2="230"/>
+            </g>
+            <line class="axis" x1="64" y1="240" x2="530" y2="240"/>
+            <line class="axis" x1="64" y1="40" x2="64" y2="240"/>
+            <path class="curve curve--a" d="M64 232 C100 230 120 120 170 92 C215 68 245 96 290 132 C340 172 420 196 530 204"/>
+            <path class="curve curve--b" d="M64 232 C100 231 130 190 175 172 C225 152 255 166 300 178 C360 194 440 202 530 206"/>
+            <g class="chart-labels">
+              <text x="60" y="262" text-anchor="middle">0</text>
+              <text x="275" y="262" text-anchor="middle">60</text>
+              <text x="515" y="262" text-anchor="middle">120 min</text>
+              <text x="76" y="32">glucosa en sangre ↑</text>
+            </g>
+          </svg>
+          <p class="chart-note">
+            Representación esquemática del efecto de una fibra soluble sobre la curva posprandial.
+            No corresponde a un estudio clínico del prototipo.
+          </p>
+        </figure>
+      </div>
+
+      <div class="comp-strip" data-reveal>
+        <p>En el envase:</p>
+        <ul>
+          <li>Mucílago de <em>Opuntia ficus-indica</em></li>
+          <li>Fibra soluble</li>
+          <li>Cultivos vivos</li>
+          <li>Calcio</li>
+          <li>Polifenoles</li>
+          <li>Sin azúcar añadida</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TIENDA ============ -->
+  <section class="section shop" id="producto">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal><span class="dot"></span> 03 — La tienda</p>
+          <h2 class="h2" data-reveal>Tres formas de <em>probar el nopal.</em></h2>
+        </div>
+        <p class="head-aside" data-reveal>
+          Misma base funcional, tres perfiles de sabor. Elige el que mejor se adapte a tu rutina.
+          Precios de demostración del prototipo.
+        </p>
+      </header>
+
+      <div class="product-grid" id="productGrid" aria-live="polite">
+        <noscript><p class="notice">Activa JavaScript para ver la tienda interactiva.</p></noscript>
+      </div>
+      <p class="shop-note">* Prototipo académico. El carrito y el checkout son una simulación: no se procesan pagos ni se realizan envíos reales.</p>
+
+      <div class="facts" id="ficha">
+        <div class="facts-head">
+          <div>
+            <p class="eyebrow"><span class="dot"></span> Ficha técnica</p>
+            <h3 class="facts-title">Lo que hay detrás de cada envase.</h3>
+          </div>
+          <button class="btn btn--ghost btn--sm" type="button" data-action="print">
+            <svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Imprimir ficha
+          </button>
+        </div>
+
+        <div class="facts-body">
+          <div class="facts-tabs" role="tablist" aria-label="Ficha técnica del producto">
+            <button class="facts-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panelIngredientes" id="tabIngredientes" data-fact-tab="ingredientes">Ingredientes</button>
+            <button class="facts-tab" type="button" role="tab" aria-selected="false" aria-controls="panelNutricion" id="tabNutricion" data-fact-tab="nutricion">Perfil nutrimental</button>
+            <button class="facts-tab" type="button" role="tab" aria-selected="false" aria-controls="panelConservacion" id="tabConservacion" data-fact-tab="conservacion">Conservación</button>
+          </div>
+
+          <div class="facts-panels">
+            <div class="facts-panel" id="panelIngredientes" role="tabpanel" aria-labelledby="tabIngredientes" data-fact-panel="ingredientes">
+              <h4>Base del prototipo</h4>
+              <ul class="ing-list">
+                <li>Leche entera pasteurizada</li>
+                <li>Mucílago de nopal (<em>Opuntia ficus-indica</em>)</li>
+                <li>Cultivos lácticos vivos</li>
+                <li>Canela</li>
+              </ul>
+              <h4>Según la variante</h4>
+              <ul class="ing-list ing-list--soft">
+                <li><strong>Original:</strong> sin endulzantes añadidos.</li>
+                <li><strong>Endulzado:</strong> estevia o miel natural.</li>
+                <li><strong>Afrutado:</strong> fruta de temporada (fresa, mango o guayaba) y estevia.</li>
+              </ul>
+              <p class="micro">Contiene leche (lactosa). Sin colorantes ni conservadores añadidos. Elaborado en un entorno académico de laboratorio.</p>
+            </div>
+
+            <div class="facts-panel" id="panelNutricion" role="tabpanel" aria-labelledby="tabNutricion" data-fact-panel="nutricion" hidden>
+              <table class="nutri-table">
+                <caption>Valores por porción de 150 g</caption>
+                <tbody>
+                  <tr><th scope="row">Energía</th><td>95 kcal</td></tr>
+                  <tr><th scope="row">Proteína</th><td>5.2 g</td></tr>
+                  <tr><th scope="row">Grasa total</th><td>3.1 g</td></tr>
+                  <tr class="sub"><th scope="row">— Grasa saturada</th><td>1.9 g</td></tr>
+                  <tr><th scope="row">Carbohidratos</th><td>11.4 g</td></tr>
+                  <tr class="sub"><th scope="row">— Azúcares</th><td>6.8 g</td></tr>
+                  <tr><th scope="row">Fibra dietética</th><td>3.5 g</td></tr>
+                  <tr><th scope="row">Calcio</th><td>180 mg</td></tr>
+                  <tr><th scope="row">Sodio</th><td>65 mg</td></tr>
+                </tbody>
+              </table>
+              <p class="micro">Valores estimados del prototipo base. Los azúcares provienen de la lactosa natural de la leche. No es una declaración nutrimental oficial.</p>
+            </div>
+
+            <div class="facts-panel" id="panelConservacion" role="tabpanel" aria-labelledby="tabConservacion" data-fact-panel="conservacion" hidden>
+              <ul class="care-list">
+                <li>
+                  <span class="care-icon"><svg class="icon" aria-hidden="true"><use href="#i-snow"/></svg></span>
+                  <div><strong>Refrigeración</strong><p>Mantener entre 2 y 6 °C en todo momento.</p></div>
+                </li>
+                <li>
+                  <span class="care-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+                  <div><strong>Vida útil</strong><p>Consumir preferentemente en los 10 días posteriores a la elaboración.</p></div>
+                </li>
+                <li>
+                  <span class="care-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+                  <div><strong>Antes de abrir</strong><p>Agitar suavemente para integrar el suero natural. No congelar.</p></div>
+                </li>
+                <li>
+                  <span class="care-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+                  <div><strong>Envase</strong><p>Vaso de vidrio reutilizable con tapa metálica. Lote piloto de 150 g.</p></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESO ============ -->
+  <section class="section process" id="proceso">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal><span class="dot"></span> 04 — El proceso</p>
+          <h2 class="h2" data-reveal>Del nopal <em>al envase.</em></h2>
+        </div>
+        <p class="head-aside" data-reveal>
+          Cuatro etapas, un lote pequeño y mucho termómetro. Cada paso busca conservar
+          la fibra intacta y asegurar un producto inocuo.
+        </p>
+      </header>
+
+      <ol class="process-list">
+        <li class="process-step" data-reveal>
+          <div class="process-top"><span class="process-num">I</span><span class="time-chip">~90 min</span></div>
+          <h3>Extracción del mucílago</h3>
+          <p>Selección y picado del nopal, extracción térmica y filtrado para obtener la fibra soluble.</p>
+        </li>
+        <li class="process-step" data-reveal style="--d:.08s">
+          <div class="process-top"><span class="process-num">II</span><span class="time-chip">~2 h</span></div>
+          <h3>Mezcla y pasteurización</h3>
+          <p>Integración del mucílago a la base láctea y tratamiento térmico para garantizar inocuidad.</p>
+        </li>
+        <li class="process-step" data-reveal style="--d:.16s">
+          <div class="process-top"><span class="process-num">III</span><span class="time-chip">6–10 h</span></div>
+          <h3>Inoculación y fermentación</h3>
+          <p>Adición del cultivo iniciador e incubación con monitoreo de acidez y pH.</p>
+        </li>
+        <li class="process-step" data-reveal style="--d:.24s">
+          <div class="process-top"><span class="process-num">IV</span><span class="time-chip">Control final</span></div>
+          <h3>Enfriado y análisis</h3>
+          <p>Refrigeración inmediata, reposo y evaluación sensorial del lote piloto.</p>
+        </li>
+      </ol>
+
+      <div class="process-note" data-reveal>
+        <svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+        <p><strong>El detalle que importa:</strong> el mucílago se incorpora a baja temperatura para no perder su capacidad de retener agua. Es lo que da la textura cremosa y el efecto sobre la glucosa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FERIA ============ -->
+  <section class="section fair" id="feria">
+    <div class="container fair-grid">
+      <div class="fair-copy">
+        <p class="eyebrow" data-reveal><span class="dot"></span> 05 — Bitácora</p>
+        <h2 class="h2" data-reveal>Así se vivió la <em>Feria de Alimentos.</em></h2>
+        <p class="lead" data-reveal>
+          Durante la feria presentamos el prototipo por primera vez: tres variantes, vasitos de
+          degustación y la explicación del proceso detrás de cada lote.
+        </p>
+        <p data-reveal>
+          El stand se volvió una pequeña aula de bioquímica. Entre cucharada y cucharada
+          explicamos qué es el mucílago, por qué la textura importa y cómo una fibra puede
+          cambiar la velocidad con la que el cuerpo absorbe azúcares.
+        </p>
+
+        <div class="learn-grid">
+          <article class="learn-card" data-reveal>
+            <span>01</span>
+            <h3>Formulación</h3>
+            <p>Equilibrar acidez, dulzor y firmeza sin perder el beneficio funcional.</p>
+          </article>
+          <article class="learn-card" data-reveal style="--d:.08s">
+            <span>02</span>
+            <h3>Inocuidad</h3>
+            <p>Mantener la cadena de frío durante toda la degustación.</p>
+          </article>
+          <article class="learn-card" data-reveal style="--d:.16s">
+            <span>03</span>
+            <h3>Comunicación</h3>
+            <p>Traducir la bioquímica a algo que cualquiera pueda entender.</p>
+          </article>
+        </div>
+      </div>
+
+      <aside class="fair-ticket" data-reveal style="--d:.1s" aria-label="Tarjeta de degustación del prototipo">
+        <div class="ticket-head">
+          <span>Degustación · Lote piloto 001</span>
+          <span>ITESCO</span>
+        </div>
+        <h3 class="ticket-title">Mesa de cata</h3>
+        <p class="ticket-sub">Tres variantes, un mismo principio: nopal + fermentación viva.</p>
+        <ul class="ticket-list">
+          <li>
+            <span class="ticket-dot" style="--dot:#A9C08C"></span>
+            <div><strong>Original · Zero</strong><small>Sin azúcar añadida</small></div>
+            <span class="ticket-check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+          </li>
+          <li>
+            <span class="ticket-dot" style="--dot:#E3BF7A"></span>
+            <div><strong>Endulzado · Estevia</strong><small>Un toque dulce natural</small></div>
+            <span class="ticket-check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+          </li>
+          <li>
+            <span class="ticket-dot" style="--dot:#E0A8A4"></span>
+            <div><strong>Afrutado · Temporada</strong><small>Fresa, mango o guayaba</small></div>
+            <span class="ticket-check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+          </li>
+        </ul>
+        <div class="ticket-foot">
+          <span>Servido a 4 °C</span>
+          <span>Coatzacoalcos, Ver.</span>
+        </div>
+        <span class="ticket-stamp">Prototipo</span>
+        <p class="ticket-note">Análisis sensorial con asistentes y jurado</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ EQUIPO ============ -->
+  <section class="section team" id="equipo">
+    <div class="container team-grid">
+      <div class="team-intro">
+        <p class="eyebrow" data-reveal><span class="dot"></span> 06 — El equipo</p>
+        <h2 class="h2" data-reveal>Cinco estudiantes, <em>una idea.</em></h2>
+        <p class="lead" data-reveal>
+          Gluco-Control nació en el Instituto Tecnológico Superior de Coatzacoalcos como
+          proyecto de innovación alimentaria. Un equipo de Ingeniería Bioquímica que creyó
+          que la tradición y la ciencia pueden ir de la mano.
+        </p>
+        <div class="team-meta" data-reveal>
+          <span>ITESCO</span>
+          <span>Coatzacoalcos, Veracruz</span>
+          <span>2026</span>
+        </div>
+      </div>
+
+      <ol class="team-list">
+        <li data-reveal><span class="team-index">01</span><span class="team-avatar">AM</span><span class="team-name">Alejandro Mendoza Gutiérrez</span></li>
+        <li data-reveal style="--d:.05s"><span class="team-index">02</span><span class="team-avatar">AP</span><span class="team-name">Alexis Pérez Hernández</span></li>
+        <li data-reveal style="--d:.1s"><span class="team-index">03</span><span class="team-avatar">AL</span><span class="team-name">Azul Alondra Lara Rosario</span></li>
+        <li data-reveal style="--d:.15s"><span class="team-index">04</span><span class="team-avatar">MF</span><span class="team-name">María Fernanda Fajardo Barbis</span></li>
+        <li data-reveal style="--d:.2s"><span class="team-index">05</span><span class="team-avatar">PT</span><span class="team-name">Pedro de Jesús Toto Vences</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ MODO DE USO ============ -->
+  <section class="section serve" id="consumo">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal><span class="dot"></span> 07 — Modo de uso</p>
+          <h2 class="h2" data-reveal>¿Cómo <em>consumirlo?</em></h2>
+        </div>
+        <p class="head-aside" data-reveal>
+          No necesita receta. Un envase al día, siempre frío, es la forma más sencilla
+          de sumar fibra y probióticos a tu rutina.
+        </p>
+      </header>
+
+      <div class="serve-grid">
+        <article class="serve-card" data-reveal>
+          <span class="serve-num">01</span>
+          <h3>En el desayuno</h3>
+          <p>La opción perfecta para comenzar el día con energía y control glucémico desde la mañana.</p>
+        </article>
+        <article class="serve-card" data-reveal style="--d:.06s">
+          <span class="serve-num">02</span>
+          <h3>Como colación</h3>
+          <p>Ideal entre comidas para mantener la saciedad y evitar picos de glucosa a media tarde.</p>
+        </article>
+        <article class="serve-card" data-reveal style="--d:.12s">
+          <span class="serve-num">03</span>
+          <h3>Con fruta y granola</h3>
+          <p>Suma frutas bajas en azúcar y granola sin endulzar para una comida completa.</p>
+        </article>
+        <article class="serve-card" data-reveal style="--d:.18s">
+          <span class="serve-num">04</span>
+          <h3>En licuados</h3>
+          <p>Mézclalo con tus ingredientes favoritos para preparar smoothies saludables.</p>
+        </article>
+      </div>
+
+      <div class="tip" data-reveal>
+        <svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+        <p><strong>Tip del equipo:</strong> sírvelo a 4 °C. El frío mantiene la textura cremosa y conserva mejor los cultivos vivos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section faq" id="preguntas">
+    <div class="container faq-grid">
+      <div class="faq-intro">
+        <p class="eyebrow" data-reveal><span class="dot"></span> 08 — Dudas</p>
+        <h2 class="h2" data-reveal>Preguntas <em>frecuentes.</em></h2>
+        <p class="lead" data-reveal>
+          Lo que más nos preguntaron en la feria, con respuestas honestas.
+        </p>
+        <a href="#contacto" class="link-arrow" data-reveal>¿Falta algo? Escríbenos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+
+      <div class="faq-list" data-reveal>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Es apto para personas con diabetes?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div><p>Está formulado sin azúcares añadidos y con un aporte moderado de carbohidratos, pero es un prototipo académico. Cualquier cambio en la dieta debe consultarse con un profesional de la salud.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Qué contiene exactamente?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div><p>Leche entera pasteurizada, mucílago de nopal, cultivos lácticos vivos y canela. La versión Endulzada añade estevia o miel; la Afrutada, fruta de temporada. Contiene lactosa.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Por qué el nopal?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div><p>Su mucílago es una fibra soluble que forma una red viscosa en el tracto digestivo. Esa red ralentiza la absorción de carbohidratos y, además, sirve de alimento a los probióticos del yogurt.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Cómo se conserva y cuánto dura?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div><p>En refrigeración, entre 2 y 6 °C, y preferentemente dentro de los 10 días posteriores a su elaboración. No debe congelarse. Agítalo antes de abrir para integrar el suero natural.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Puedo comprarlo en línea?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div><p>No. La tienda de este sitio es una simulación para presentar el proyecto. No se procesan pagos ni se realizan envíos. Si te interesa el desarrollo, escríbenos y con gusto compartimos la ficha técnica.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Reemplaza un tratamiento médico?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div><p>No. Gluco-Control es un alimento funcional en desarrollo, no un medicamento. No sustituye la medicación, la dieta ni el seguimiento de un profesional de la salud.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="section contact" id="contacto">
+    <div class="container contact-grid">
+      <div class="contact-copy">
+        <p class="eyebrow eyebrow--light" data-reveal><span class="dot"></span> 09 — Contacto</p>
+        <h2 class="h2 h2--light" data-reveal>¿Te interesa el proyecto?<br /><em>Hablemos.</em></h2>
+        <p class="lead lead--light" data-reveal>
+          Podemos compartir la ficha técnica, el proceso de elaboración o coordinar
+          una degustación para tu institución.
+        </p>
+
+        <ul class="contact-list" data-reveal>
+          <li>
+            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+            <div><strong>Correo</strong><a href="mailto:glucocontrol@gmail.com">glucocontrol@gmail.com</a></div>
+          </li>
+          <li>
+            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+            <div><strong>Teléfono</strong><a href="tel:+529617021594">961 702 1594</a></div>
+          </li>
+          <li>
+            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+            <div><strong>Dirección</strong><p>Nardo 7, Iquisa, 96540<br />Coatzacoalcos, Veracruz</p></div>
+          </li>
+          <li>
+            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-school"/></svg></span>
+            <div><strong>Institución</strong><p>Instituto Tecnológico Superior de Coatzacoalcos</p></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-form-card" data-reveal style="--d:.1s">
+        <h3>Envíanos un mensaje</h3>
+        <p class="form-sub">Respondemos normalmente en 2–3 días hábiles.</p>
+        <form id="contactForm" novalidate>
+          <label class="field">
+            <span>Nombre completo</span>
+            <input type="text" id="contactName" name="name" autocomplete="name" placeholder="Tu nombre" required />
+          </label>
+          <label class="field">
+            <span>Correo electrónico</span>
+            <input type="email" id="contactEmail" name="email" autocomplete="email" placeholder="tu@correo.com" required />
+          </label>
+          <label class="field">
+            <span>Mensaje</span>
+            <textarea id="contactMessage" name="message" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+          </label>
+          <p class="field-error" id="contactError" hidden></p>
+          <button class="btn btn--solid btn--block" type="submit">Enviar mensaje <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="form-note">Al enviar aceptas que guardemos tus datos únicamente en este navegador (demostración).</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#inicio" class="brand brand--light">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-nopal"/></svg></span>
+        <span class="brand-name">Gluco<span>·</span>Control</span>
+      </a>
+      <p>Yogurt funcional de nopal.<br />Alimenta tu cuerpo con lo mejor de la naturaleza.</p>
+      <span class="footer-badge">Proyecto académico · ITESCO 2026</span>
+    </div>
+
+    <nav class="footer-col" aria-label="Explorar">
+      <h4>Explorar</h4>
+      <a href="#producto">Producto</a>
+      <a href="#ciencia">Ciencia</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#feria">Feria</a>
+    </nav>
+
+    <nav class="footer-col" aria-label="Proyecto">
+      <h4>Proyecto</h4>
+      <a href="#equipo">Equipo</a>
+      <a href="#consumo">Modo de uso</a>
+      <a href="#preguntas">Preguntas frecuentes</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="mailto:glucocontrol@gmail.com">glucocontrol@gmail.com</a>
+      <a href="tel:+529617021594">961 702 1594</a>
+      <p class="footer-address">Nardo 7, Iquisa<br />96540 Coatzacoalcos, Ver.</p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© <span id="year">2026</span> Gluco-Control · Ingeniería Bioquímica · Coatzacoalcos, Veracruz.</p>
+    <p class="footer-legal">Sitio académico. La tienda es una simulación y la información no sustituye la consulta médica.</p>
+  </div>
+</footer>
+
+<!-- ============ CARRITO (DRAWER) ============ -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+  <header class="drawer-head">
+    <div>
+      <p class="eyebrow"><span class="dot"></span> Tu selección</p>
+      <h2 id="cartTitle">Carrito <span class="cart-head-count" id="cartHeadCount">(0)</span></h2>
+    </div>
+    <button class="icon-btn" type="button" data-close-drawer aria-label="Cerrar carrito">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+  </header>
+  <div class="drawer-body" id="cartItems"></div>
+  <footer class="drawer-foot" id="cartFoot"></footer>
+</aside>
+
+<!-- ============ MODAL: CUENTA ============ -->
+<div class="modal-overlay" id="authModal" hidden>
+  <div class="modal modal--auth" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="modal-close" type="button" data-close aria-label="Cerrar">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="modal-head">
+      <span class="modal-mark"><svg class="icon" aria-hidden="true"><use href="#i-nopal"/></svg></span>
+      <h2 id="authTitle">Tu cuenta</h2>
+      <p>Guarda favoritos y revisa tus pedidos de demostración.</p>
+    </div>
+
+    <div class="auth-tabs" role="tablist" aria-label="Acceso a la cuenta">
+      <button class="auth-tab is-active" type="button" role="tab" aria-selected="true" data-auth-tab="login">Ingresar</button>
+      <button class="auth-tab" type="button" role="tab" aria-selected="false" data-auth-tab="register">Crear cuenta</button>
+    </div>
+
+    <form id="loginForm" class="auth-panel" novalidate>
+      <label class="field">
+        <span>Correo electrónico</span>
+        <input type="email" id="loginEmail" autocomplete="email" placeholder="tu@correo.com" required />
+      </label>
+      <label class="field">
+        <span>Contraseña</span>
+        <input type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••" required />
+      </label>
+      <p class="field-error" id="loginError" hidden></p>
+      <button class="btn btn--solid btn--block" type="submit">Ingresar</button>
+      <button class="link-btn" type="button" data-auth-switch="register">¿No tienes cuenta? Regístrate</button>
+    </form>
+
+    <form id="registerForm" class="auth-panel" novalidate hidden>
+      <div class="field-row">
+        <label class="field">
+          <span>Nombre</span>
+          <input type="text" id="regName" autocomplete="given-name" placeholder="Tu nombre" required />
+        </label>
+        <label class="field">
+          <span>Apellido</span>
+          <input type="text" id="regLastName" autocomplete="family-name" placeholder="Tu apellido" required />
+        </label>
+      </div>
+      <label class="field">
+        <span>Correo electrónico</span>
+        <input type="email" id="regEmail" autocomplete="email" placeholder="tu@correo.com" required />
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span>Contraseña</span>
+          <input type="password" id="regPassword" autocomplete="new-password" placeholder="Mínimo 6 caracteres" required minlength="6" />
+        </label>
+        <label class="field">
+          <span>Confirmar</span>
+          <input type="password" id="regConfirm" autocomplete="new-password" placeholder="Repite la contraseña" required />
+        </label>
+      </div>
+      <p class="field-error" id="registerError" hidden></p>
+      <button class="btn btn--solid btn--block" type="submit">Crear cuenta</button>
+      <button class="link-btn" type="button" data-auth-switch="login">¿Ya tienes cuenta? Inicia sesión</button>
+    </form>
+
+    <p class="form-note form-note--center">Tus datos se guardan solo en este navegador. Este sitio es una demostración académica.</p>
+  </div>
+</div>
+
+<!-- ============ MODAL: PRODUCTO ============ -->
+<div class="modal-overlay" id="productModal" hidden>
+  <div class="modal modal--product" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+    <button class="modal-close" type="button" data-close aria-label="Cerrar detalle del producto">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="product-modal-body" id="productModalBody"></div>
+  </div>
+</div>
+
+<!-- ============ MODAL: CHECKOUT ============ -->
+<div class="modal-overlay" id="checkoutModal" hidden>
+  <div class="modal modal--checkout" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <button class="modal-close" type="button" data-close aria-label="Cerrar checkout">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+
+    <div class="checkout-progress" id="checkoutProgress" aria-hidden="true">
+      <span class="is-active" data-step-dot="1">1</span><i></i>
+      <span data-step-dot="2">2</span><i></i>
+      <span data-step-dot="3">3</span>
+    </div>
+
+    <div class="checkout-step" id="stepAddress">
+      <h2 id="checkoutTitle">Datos de envío</h2>
+      <p class="modal-sub">Este es un checkout de demostración: no se enviará nada.</p>
+      <form id="addressForm" novalidate>
+        <div class="field-row">
+          <label class="field"><span>Nombre completo</span><input type="text" id="shipName" autocomplete="name" placeholder="Nombre completo" required /></label>
+          <label class="field"><span>Teléfono</span><input type="tel" id="shipPhone" autocomplete="tel" inputmode="tel" placeholder="10 dígitos" required /></label>
+        </div>
+        <label class="field"><span>Calle y número</span><input type="text" id="shipStreet" autocomplete="street-address" placeholder="Ej. Av. Insurgentes 123" required /></label>
+        <div class="field-row">
+          <label class="field"><span>Colonia</span><input type="text" id="shipColony" placeholder="Colonia" required /></label>
+          <label class="field"><span>Código postal</span><input type="text" id="shipZip" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" placeholder="96540" required /></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>Ciudad</span><input type="text" id="shipCity" value="Coatzacoalcos" required /></label>
+          <label class="field"><span>Estado</span><input type="text" id="shipState" value="Veracruz" required /></label>
+        </div>
+        <label class="field"><span>Referencias <em>(opcional)</em></span><input type="text" id="shipRef" placeholder="Entre calles, color de casa, etc." /></label>
+        <p class="field-error" id="addressError" hidden></p>
+        <button class="btn btn--solid btn--block" type="submit">Continuar al pago</button>
+      </form>
+    </div>
+
+    <div class="checkout-step" id="stepPayment" hidden>
+      <h2>Método de pago</h2>
+      <p class="modal-sub">El pedido se registra en tu navegador. No hay cargos reales.</p>
+
+      <div class="pay-grid">
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="card" checked />
+          <span class="pay-box">
+            <span class="pay-name">Tarjeta <small>Crédito o débito</small></span>
+            <span class="pay-check"></span>
+          </span>
+        </label>
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="transfer" />
+          <span class="pay-box">
+            <span class="pay-name">Transferencia <small>SPEI</small></span>
+            <span class="pay-check"></span>
+          </span>
+        </label>
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="cash" />
+          <span class="pay-box">
+            <span class="pay-name">Efectivo <small>OXXO</small></span>
+            <span class="pay-check"></span>
+          </span>
+        </label>
+      </div>
+
+      <div class="card-fields" id="cardFields">
+        <label class="field"><span>Número de tarjeta</span><input type="text" id="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" maxlength="19" /></label>
+        <label class="field"><span>Nombre en la tarjeta</span><input type="text" id="cardName" autocomplete="cc-name" placeholder="Como aparece en la tarjeta" /></label>
+        <div class="field-row">
+          <label class="field"><span>Vencimiento</span><input type="text" id="cardExpiry" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" /></label>
+          <label class="field"><span>CVV</span><input type="text" id="cardCVV" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" /></label>
+        </div>
+      </div>
+
+      <div class="info-box" id="transferInfo" hidden>
+        <p><strong>CLABE:</strong> 0612 9000 1234 5678 90</p>
+        <p><strong>Banco:</strong> BBVA México</p>
+        <p><strong>Beneficiario:</strong> Gluco-Control (prototipo académico)</p>
+        <p class="micro">Envía tu comprobante a glucocontrol@gmail.com. Este paso es simulado.</p>
+      </div>
+
+      <div class="info-box" id="cashInfo" hidden>
+        <p>Se generaría una referencia de pago al confirmar el pedido, con 48 horas para pagar en cualquier tienda OXXO.</p>
+        <p class="micro">Este paso es simulado: no se genera ninguna referencia real.</p>
+      </div>
+
+      <div class="order-box" id="orderBox"></div>
+      <p class="field-error" id="payError" hidden></p>
+      <button class="btn btn--solid btn--block" type="button" id="payBtn">Confirmar pedido</button>
+      <button class="link-btn" type="button" id="backToAddress">← Volver a datos de envío</button>
+    </div>
+
+    <div class="checkout-step" id="stepSuccess" hidden>
+      <div class="success-mark"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></div>
+      <h2>Pedido confirmado</h2>
+      <p class="modal-sub">Gracias por probar la demo. Tu pedido quedó registrado en este navegador.</p>
+      <div class="order-box" id="successDetails"></div>
+      <p class="demo-banner">Esta es una página educativa: no se realizó ningún cargo ni se enviará ningún producto.</p>
+      <button class="btn btn--solid btn--block" type="button" id="closeSuccess">Volver a la tienda</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: PERFIL ============ -->
+<div class="modal-overlay" id="profileModal" hidden>
+  <div class="modal modal--profile" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <button class="modal-close" type="button" data-close aria-label="Cerrar perfil">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <h2 class="sr-only" id="profileTitle">Mi perfil</h2>
+    <div id="profileBody"></div>
+  </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
